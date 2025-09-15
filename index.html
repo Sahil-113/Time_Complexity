@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Complexity Cheat Sheet</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.3;
+      color: #333;
+      background: #fff;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    .page {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 1cm;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 15px;
+      padding: 12px;
+      background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+      color: white;
+      border-radius: 5px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+      border: 1px solid #dee2e6;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+    }
+
+    .color-box {
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid #dee2e6;
+      page-break-inside: avoid;
+    }
+
+    .card-header {
+      background: #4a6fa5;
+      color: white;
+      padding: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .card-body {
+      padding: 10px;
+    }
+
+    .complexity-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 8px;
+      margin-bottom: 5px;
+      border-radius: 4px;
+      background: #f8f9fa;
+    }
+
+    .O1 {
+      background: #d4edda;
+    }
+
+    .Ologn {
+      background: #d1ecf1;
+    }
+
+    .On {
+      background: #fff3cd;
+    }
+
+    .Onlogn {
+      background: #f8d7da;
+    }
+
+    .On2 {
+      background: #e2e3e5;
+    }
+
+    .Oh {
+      background: #cce5ff;
+    }
+
+    .Ovh {
+      background: #d6d4ec;
+    }
+
+    footer {
+      text-align: right;
+      padding: 15px;
+      margin-top: 15px;
+      font-size: 11px;
+      color: #6c757d;
+      font-weight: 700;
+      border-top: 5px solid #dee2e6;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .page {
+        width: 100%;
+        height: 100%;
+        padding: 0.5cm;
+        box-shadow: none;
+        margin: 0;
+      }
+
+      header,
+      .card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      .legend {
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+      }
+
+      .grid {
+        gap: 8px;
+      }
+
+      .card-header {
+        padding: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <h1>Time Complexity By Sahil Sir</h1>
+      <p class="subtitle">Reference for technical interviews</p>
+    </header>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="color-box" style="background: #d4edda;"></div>
+        <span>O(1) - Constant</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box" style="background: #d1ecf1;"></div>
+        <span>O(log n) - Logarithmic</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box" style="background: #fff3cd;"></div>
+        <span>O(n) - Linear</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box" style="background: #f8d7da;"></div>
+        <span>O(n log n)</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box" style="background: #e2e3e5;"></div>
+        <span>O(n²) - Quadratic</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box" style="background: #cce5ff;"></div>
+        <span>O(h) - Height</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Array -->
+      <div class="card">
+        <div class="card-header">Array</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Access</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Search</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Insertion (end)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Insertion (middle)</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Deletion (end)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Deletion (middle)</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- String -->
+      <div class="card">
+        <div class="card-header">String</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Access</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Concatenation</span><span>O(n)</span></div>
+          <div class="complexity-item On"><span>Comparison</span><span>O(n)</span></div>
+          <div class="complexity-item On"><span>Substring</span><span>O(n)</span></div>
+          <div class="complexity-item On2"><span>Search (naive)</span><span>O(n*m)</span></div>
+          <div class="complexity-item On"><span>Search (KMP)</span><span>O(n+m)</span></div>
+        </div>
+      </div>
+
+      <!-- Linked List -->
+      <div class="card">
+        <div class="card-header">Linked List (Singly)</div>
+        <div class="card-body">
+          <div class="complexity-item On"><span>Access</span><span>O(n)</span></div>
+          <div class="complexity-item On"><span>Search</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Insertion (head)</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Insertion (tail)*</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Insertion (middle)</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Deletion (head)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Deletion (tail)</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- Doubly Linked List -->
+      <div class="card">
+        <div class="card-header">Doubly Linked List</div>
+        <div class="card-body">
+          <div class="complexity-item On"><span>Access</span><span>O(n)</span></div>
+          <div class="complexity-item On"><span>Search</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Insertion (head/tail)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Insertion (middle)</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Deletion (head/tail)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Deletion (middle)</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- Queue -->
+      <div class="card">
+        <div class="card-header">Queue (Linked List)</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Enqueue</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Dequeue</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Peek</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Search</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- Priority Queue -->
+      <div class="card">
+        <div class="card-header">Priority Queue (Heap)</div>
+        <div class="card-body">
+          <div class="complexity-item Ologn"><span>Insert</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Extract Min/Max</span><span>O(log n)</span></div>
+          <div class="complexity-item O1"><span>Peek</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Search</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- Stack -->
+      <div class="card">
+        <div class="card-header">Stack</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Push</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Pop</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Peek</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Search</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- Binary Search Tree -->
+      <div class="card">
+        <div class="card-header">Binary Search Tree</div>
+        <div class="card-body">
+          <div class="complexity-item Oh"><span>Access</span><span>O(h)*</span></div>
+          <div class="complexity-item Oh"><span>Search</span><span>O(h)*</span></div>
+          <div class="complexity-item Oh"><span>Insertion</span><span>O(h)*</span></div>
+          <div class="complexity-item Oh"><span>Deletion</span><span>O(h)*</span></div>
+          <div class="complexity-item Oh"><span>Min/Max</span><span>O(h)*</span></div>
+        </div>
+      </div>
+
+      <!-- Balanced BST -->
+      <div class="card">
+        <div class="card-header">Balanced BST (AVL/RB)</div>
+        <div class="card-body">
+          <div class="complexity-item Ologn"><span>Access</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Search</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Insertion</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Deletion</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Min/Max</span><span>O(log n)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>- By Sahil Sir</p>
+    </footer>
+  </div>
+
+  <div class="page">
+    <header>
+      <h1>Time Complexity (Continued)</h1>
+      <p class="subtitle">Reference for technical interviews</p>
+    </header>
+
+    <div class="grid">
+      <!-- Graph (Adjacency List) -->
+      <div class="card">
+        <div class="card-header">Graph (Adjacency List)</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Add Vertex</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Add Edge</span><span>O(1)</span></div>
+          <div class="complexity-item Ovh"><span>Remove Vertex</span><span>O(|V| + |E|)</span></div>
+          <div class="complexity-item Ovh"><span>Remove Edge</span><span>O(|E|)</span></div>
+          <div class="complexity-item Ovh"><span>Query</span><span>O(|V|)</span></div>
+          <div class="complexity-item Ovh"><span>BFS/DFS</span><span>O(|V| + |E|)</span></div>
+        </div>
+      </div>
+
+      <!-- Graph (Adjacency Matrix) -->
+      <div class="card">
+        <div class="card-header">Graph (Adjacency Matrix)</div>
+        <div class="card-body">
+          <div class="complexity-item On2"><span>Add Vertex</span><span>O(|V|²)</span></div>
+          <div class="complexity-item O1"><span>Add Edge</span><span>O(1)</span></div>
+          <div class="complexity-item On2"><span>Remove Vertex</span><span>O(|V|²)</span></div>
+          <div class="complexity-item O1"><span>Remove Edge</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Query</span><span>O(1)</span></div>
+          <div class="complexity-item On2"><span>BFS/DFS</span><span>O(|V|²)</span></div>
+        </div>
+      </div>
+
+      <!-- Hash Table -->
+      <div class="card">
+        <div class="card-header">Hash Table</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Insert (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Insert (worst)</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Delete (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Delete (worst)</span><span>O(n)</span></div>
+          <div class="complexity-item O1"><span>Search (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Search (worst)</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- Map (Hash Based) -->
+      <div class="card">
+        <div class="card-header">Map (Hash Based)</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Insert (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Delete (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Search (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Worst Case</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- Set (Hash Based) -->
+      <div class="card">
+        <div class="card-header">Set (Hash Based)</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Insert (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Delete (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item O1"><span>Search (avg)</span><span>O(1)</span></div>
+          <div class="complexity-item On"><span>Worst Case</span><span>O(n)</span></div>
+        </div>
+      </div>
+
+      <!-- TreeSet/TreeMap -->
+      <div class="card">
+        <div class="card-header">TreeSet/TreeMap (Balanced BST)</div>
+        <div class="card-body">
+          <div class="complexity-item Ologn"><span>Insert</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Delete</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Search</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Min/Max</span><span>O(log n)</span></div>
+        </div>
+      </div>
+
+      <!-- Heap -->
+      <div class="card">
+        <div class="card-header">Heap (Binary)</div>
+        <div class="card-body">
+          <div class="complexity-item O1"><span>Find Min/Max</span><span>O(1)</span></div>
+          <div class="complexity-item Ologn"><span>Extract Min/Max</span><span>O(log n)</span></div>
+          <div class="complexity-item Ologn"><span>Insert</span><span>O(log n)</span></div>
+          <div class="complexity-item On"><span>Search</span><span>O(n)</span></div>
+          <div class="complexity-item Ologn"><span>Decrease Key</span><span>O(log n)</span></div>
+        </div>
+      </div>
+
+      <!-- Trie -->
+      <div class="card">
+        <div class="card-header">Trie</div>
+        <div class="card-body">
+          <div class="complexity-item Ok"><span>Insert</span><span>O(L)</span></div>
+          <div class="complexity-item Ok"><span>Search</span><span>O(L)</span></div>
+          <div class="complexity-item Ok"><span>Delete</span><span>O(L)</span></div>
+          <div class="complexity-item O1"><span>Empty Trie</span><span>O(1)</span></div>
+          <div class="complexity-item"><span>L = length of word</span></div>
+        </div>
+      </div>
+
+      <!-- Bloom Filter -->
+      <div class="card">
+        <div class="card-header">Bloom Filter</div>
+        <div class="card-body">
+          <div class="complexity-item Ok"><span>Insert</span><span>O(k)</span></div>
+          <div class="complexity-item Ok"><span>Search</span><span>O(k)</span></div>
+          <div class="complexity-item O1"><span>Space</span><span>O(m)</span></div>
+          <div class="complexity-item"><span>k = hash functions</span></div>
+          <div class="complexity-item"><span>m = bits</span></div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>- By Sahil Sir</p>
+    </footer>
+  </div>
+</body>
+
+</html>
